@@ -1,6 +1,8 @@
 import express from "express";
 import morgan from "morgan";
+import _handlebars from 'handlebars'
 import { create } from "express-handlebars";
+const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access');
 import path from "path";
 // Routes
 import indexRoutes from "./routes";
@@ -24,6 +26,7 @@ class Application {
         layoutsDir: path.join(this.app.get("views"), "layouts"),
         partialsDir: path.join(this.app.get("views"), "partials"),
         defaultLayout: "main",
+        handlebars: allowInsecurePrototypeAccess(_handlebars),
         extname: ".hbs",
       }).engine
     );
