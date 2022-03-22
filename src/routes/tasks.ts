@@ -14,12 +14,16 @@ router
     const { title, description } = req.body;
     const newTask = new Task({ title, description });
     await newTask.save();
-    res.send("Saved");
+    res.redirect("/tasks/list");
   });
 
 router.route("/list").get(async (req: Request, res: Response) => {
   const tasks = await Task.find();
   res.render("tasks/list", { tasks });
+});
+
+router.route("/delete").get(async (req: Request, res: Response) => {
+  res.send("deleting");
 });
 
 export default router;
